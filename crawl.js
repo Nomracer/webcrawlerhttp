@@ -58,6 +58,7 @@ async function crawlPage(baseURL, currentURL, pages) {
   
 }
 
+//
 function getURLsFromHTML(htmlBody, baseURL){
     const urls = []
     const dom = new JSDOM(htmlBody)
