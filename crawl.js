@@ -1,7 +1,12 @@
 const { JSDOM } = require('jsdom')
 
 async function crawlPage(baseURL, currentURL, pages) {
-    console.log(`actively crawling: ${currentURL}`)
+    let date = new Date()
+    let hour = date.getHours()
+    let minute = date.getMinutes()
+    let second = date.getSeconds()
+
+    console.log(`${hour}:${minute}:${second} - actively crawling: ${currentURL}`)
 
     const baseURLObj = new URL(baseURL)
     const currentURLObj = new URL(currentURL)
@@ -9,7 +14,7 @@ async function crawlPage(baseURL, currentURL, pages) {
         return pages
     }
 
-    //basically how many times page is linked
+    //basically how many times page is linked. Sayfa ziyaret kontrol etme olayı
     const normalizedCurrentURL = normalizeURL(currentURL)
     if  (pages[normalizedCurrentURL] > 0) {
         pages[normalizedCurrentURL]++
@@ -18,8 +23,10 @@ async function crawlPage(baseURL, currentURL, pages) {
 
     pages[normalizedCurrentURL] = 1
 
-    console.log(`actively crawling:      ${currentURL}`)
- 
+   
+    
+   console.log(`${hour}:${minute}:${second} - actively crawling:       ${currentURL}`)
+
     try{
         const resp = await fetch(currentURL)
         if (resp.status > 399){
